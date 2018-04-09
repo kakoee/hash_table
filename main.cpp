@@ -5,6 +5,47 @@
 #endif
 
 
+bool is_01_editaway(char* str1,char* str2)
+{
+if(str1==NULL || str2==NULL)
+    return false;
+int len1= strlen(str1);
+int len2=strlen(str2);
+int diff_len = (len1-len2);
+if(diff_len<0)
+    diff_len = -diff_len;
+
+char* temp1;
+char* temp2;
+if(len1<len2){
+    temp1=str1;
+    temp2=str2;
+}else
+{
+    temp1=str2;
+    temp2=str1;
+}
+int diff=0;
+while(*temp1!='\0' && *temp2!='\0')
+{
+    if(*temp1 == *temp2){   
+        temp1++;
+        temp2++;
+    }
+    else{
+        temp2++;
+        if(len1==len2) temp1++;
+
+        diff++;
+    }        
+    if(diff>1)
+        return false;
+       
+}
+return true;
+
+}
+
 
 bool IsPermutation(char* str1, char* str2)
 {
@@ -102,7 +143,12 @@ if(permut)
 else
     printf("strings are NOt permutations\n");
 
-
+//
+bool edit_way= is_01_editaway("apple","aple");
+if(edit_way)
+    printf("strings are 0/1 edit away\n");
+else
+    printf("strings are NOt 0/1 edit away\n");
 
  
 }
