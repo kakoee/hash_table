@@ -18,7 +18,7 @@ public:
 
     hashLink *arr;
     int len;
-    void hashInsert(char* str);
+    int hashInsert(char* str,bool duplicate=false);
     int hashFind(char* str);
     int hashFunc(char* str);
     void print();

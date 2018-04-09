@@ -60,27 +60,34 @@ return key;
 }
 
 
-void hashTable::hashInsert(char *str)
+int hashTable::hashInsert(char *str,bool duplicate) // 0 means no collision. 1 means collision occured; 2 means already in hash; -1 not succed 
 {
     int key = hashFunc(str);
     if(key==-1)
-        return;
-    if(hashFind(str)!=-1)
-        return;    
+        return -1;
+    if(!duplicate && hashFind(str)!=-1)
+        return 2;    
 
-
+    
 
     int arrindex= key%len;
     hashLink *linkPtr= &arr[arrindex];
+    int collision=0;
+    //printf("index %d\n",arrindex);
+
+    if(linkPtr->next!=NULL)
+        collision=1;
     while(linkPtr->next!=NULL){
-        printf("collision %d\n",key);
+        //printf("collision %d\n",key);
         linkPtr = linkPtr->next;
+        
     }
 
     if(linkPtr!=NULL){
         linkPtr->setFields(str,key);
         linkPtr->next = new hashLink;
     }
+    return collision;
 }
 
 int hashTable::hashFind(char* str)
